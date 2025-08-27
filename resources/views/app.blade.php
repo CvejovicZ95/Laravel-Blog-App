@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>
-            {{ $page['props']['title'] ?? 'Some Section' }} - {{ config('app.name', 'Blog') }}
+            {{ $page['props']['title'] ?? '' }} - {{ config('app.name', 'Blog') }}
         </title>
 
 
