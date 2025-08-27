@@ -1,12 +1,13 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 
 export default function GuestLayout({ children }) {
     return (
         <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
             <div>
-                <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
+                <Link href="/">                   
+                    <h1 className="text-3xl font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors">
+                        Laravel Blog App
+                    </h1>
                 </Link>
             </div>
 
