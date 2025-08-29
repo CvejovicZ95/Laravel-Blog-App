@@ -3,6 +3,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import JoinAsGuest from '@/Components/JoinAsGuest';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 
@@ -28,7 +29,7 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
-
+            <JoinAsGuest />
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
