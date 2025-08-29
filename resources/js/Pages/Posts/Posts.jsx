@@ -1,45 +1,59 @@
 import React from 'react';
-import Header from '@/Components/Header';
-import CreatePost from './CreatePost';
-import { usePage, Head } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import AppLayout from '@/Layouts/AppLayout';
 
 export default function Posts() {
-    const { auth, posts } = usePage().props; 
+    const { posts, auth } = usePage().props;
+
     return (
-        <>
+        <AppLayout>
             <Head title="Home" />
 
-            <div>
-                {auth.user && <Header user={auth.user} />}
-            
-                <main className="p-4">
-                    <h1 className="text-2xl font-bold mb-4">Welcome to the Blog!</h1>
- 
-                   {auth.user && !auth.user.is_guest && <CreatePost />}
+            <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+                Welcome to the Blog Application!
+            </h1>
 
-                    {(!posts || posts.length === 0) && <p>No posts yet.</p>}
+            {auth.user && !auth.user.is_guest && (
+                <div className="flex justify-center mb-6">
+                    <Link
+                        href="/posts/create"
+                        className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
+                    >
+                        Create Blog
+                    </Link>
+                </div>
+            )}
 
-                    {posts && posts.map(post => (
-                        <div key={post.id} className="bg-white shadow-md rounded-md p-4 mb-6">
-                            <h2 className="text-xl font-semibold">{post.title}</h2>
-                            <p className="text-gray-700 mb-2">{post.content}</p>
-                            <p className="text-gray-500 text-sm">By {post.user?.name || 'Unknown'}</p>
+            {(!posts || posts.length === 0) && (
+                <p className="text-center text-gray-500 mt-8">No posts yet.</p>
+            )}
 
-                            <div className="mt-4">
-                                <h3 className="font-semibold mb-2">Comments</h3>
-                                <div className="border-t pt-2 mt-2">
-                                    <p className="text-gray-800">Great post! Thanks for sharing.</p>
-                                    <p className="text-gray-500 text-sm">— Jane Doe</p>
+            <div className="grid md:grid-cols-2 gap-6">
+                {posts && posts.map(post => (
+                    <div
+                        key={post.id}
+                        className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow"
+                    >
+                        <h2 className="text-xl font-bold text-gray-800 mb-2">{post.title}</h2>
+                        <p className="text-gray-700 mb-4">{post.content}</p>
+                        <p className="text-gray-500 text-sm mb-4">By {post.user?.name || 'Unknown'}</p>
+
+                        <div className="mt-4">
+                            <h3 className="font-semibold text-gray-800 mb-3">Comments</h3>
+                            <div className="space-y-3">
+                                <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
+                                    <p className="text-gray-700 text-sm">Great post! Thanks for sharing.</p>
+                                    <p className="text-gray-400 text-xs mt-1">— Jane Doe</p>
                                 </div>
-                                <div className="border-t pt-2 mt-2">
-                                    <p className="text-gray-800">I learned a lot from this post.</p>
-                                    <p className="text-gray-500 text-sm">— John Smith</p>
+                                <div className="bg-gray-50 rounded-md p-3 border border-gray-200">
+                                    <p className="text-gray-700 text-sm">I learned a lot from this post.</p>
+                                    <p className="text-gray-400 text-xs mt-1">— John Smith</p>
                                 </div>
                             </div>
                         </div>
-                    ))}
-                </main>
+                    </div>
+                ))}
             </div>
-        </>
+        </AppLayout>
     );
 }

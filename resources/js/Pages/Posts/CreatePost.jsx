@@ -1,12 +1,12 @@
 import React from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
-import GuestLayout from '@/Layouts/GuestLayout';
+import AppLayout from '@/Layouts/AppLayout';
 
-export default function Create() {
+export default function CreatePost() {
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         content: '',
@@ -18,8 +18,17 @@ export default function Create() {
     };
 
     return (
-        <GuestLayout>
+        <AppLayout>
             <Head title="Create Post" />
+
+             <div className="max-w-2xl mx-auto mt-4">
+                <Link
+                    href={route('posts.index')}
+                    className="text-blue-600 hover:underline mb-4 inline-block"
+                >
+                    &larr; Back to Posts
+                </Link>
+            </div>
 
             <form onSubmit={submit} className="max-w-2xl mx-auto mt-8 space-y-6">
                 <div>
@@ -53,6 +62,6 @@ export default function Create() {
                     Create Post
                 </PrimaryButton>
             </form>
-        </GuestLayout>
+        </AppLayout>
     );
 }

@@ -9,7 +9,7 @@ export default function Header({ user }) {
 
     return (
         <header className="p-4 bg-gray-100 flex justify-between items-center">
-            <div className="text-xl font-bold">My Blog</div>
+            <div className="text-xl font-bold">Laravel Blog Application</div>
 
             <div>
                 <span className="mr-4">Welcome, {user.name}</span>
