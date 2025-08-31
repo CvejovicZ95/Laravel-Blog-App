@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Models\Post;
+
+class CommentController extends Controller
+{
+    public function store(Request $request, Post $post)
+    {
+        $request->validate([
+            'comment' => 'required|string',
+        ]);
+
+        $user = $request->user(); 
+
+        Comment::create([
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+            'comment' => $request->comment,
+        ]);
+
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $comment = Comment::with('post')->findOrFail($id);
+
+        $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return back();
+    }
+}

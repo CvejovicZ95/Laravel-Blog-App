@@ -1,7 +1,9 @@
 import React from 'react';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
-import PostCard from '@/Pages/Posts/PostCard'; 
+import PostCard from '@/Pages/Posts/PostCard';
+import HomePageButton from '@/Components/HomePageButton';
+import CommentForm from '@/Pages/Comments/CommentForm';
 
 export default function ShowPost() {
     const { post, auth } = usePage().props;
@@ -11,12 +13,13 @@ export default function ShowPost() {
             <Head title={post.title} />
 
             <div className="max-w-2xl mx-auto mt-6">
-                <Link href="/posts" className="text-blue-600 hover:underline mb-4 inline-block">
-                    &larr; Back to Posts
-                </Link>
+                <div className="max-w-2xl mx-auto mt-4">
+                    <HomePageButton /> 
+                </div>
 
                 <PostCard post={post} auth={auth} isSingle={true} />
 
+                {auth.user && <CommentForm postId={post.id} />}
             </div>
         </AppLayout>
     );
