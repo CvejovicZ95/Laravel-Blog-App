@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->latest()->get();
+        $posts = Post::with(['user', 'comments.user'])->latest()->get();
 
         return inertia('Posts/Posts', [
             'posts' => $posts,
@@ -87,7 +87,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return inertia('Posts/ShowPost', [
-            'post' => $post->load('user'),
+            'post' => $post->load(['user', 'comments.user']),
             'auth' => [
                 'user' => auth()->user() ? [
                     'id' => auth()->user()->id,

@@ -12,7 +12,7 @@ class CommentPolicy
         return $user->id === $comment->user_id;
     }
 
-    public function delete(User $user, Comment $comment): bool
+    public function delete(User $user, Comment $comment)
     {
         return $user->id === $comment->user_id || $user->id === $comment->post->user_id;
     }

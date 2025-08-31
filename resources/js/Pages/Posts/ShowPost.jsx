@@ -1,10 +1,19 @@
-import React from 'react';
-import { Head, Link, usePage } from '@inertiajs/react';
+import React, { useState } from 'react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
-import PostCard from '@/Pages/Posts/PostCard'; 
+import PostCard from '@/Pages/Posts/PostCard';
 
 export default function ShowPost() {
     const { post, auth } = usePage().props;
+    const [newComment, setNewComment] = useState('');
+
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+        if (!newComment.trim()) return;
+
+        router.post(route('comments.store', post.id), { comment: newComment });
+        setNewComment('');
+    };
 
     return (
         <AppLayout>
@@ -17,6 +26,23 @@ export default function ShowPost() {
 
                 <PostCard post={post} auth={auth} isSingle={true} />
 
+                {auth.user && (
+                    <form onSubmit={handleCommentSubmit} className="mt-6 flex flex-col gap-2">
+                        <textarea
+                            className="border rounded p-2 w-full"
+                            rows={3}
+                            placeholder="Add a comment..."
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                        />
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        >
+                            Post Comment
+                        </button>
+                    </form>
+                )}
             </div>
         </AppLayout>
     );
