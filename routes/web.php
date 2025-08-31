@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Auth\GuestLoginController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,8 +14,6 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-
-Route::post('/guest-login', [GuestLoginController::class, 'store'])->name('guest.login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
