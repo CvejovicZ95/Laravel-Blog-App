@@ -7,21 +7,37 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import AppLayout from '@/Layouts/AppLayout';
 
 export default function CreatePost() {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         title: '',
         content: '',
     });
 
+    const [attemptedSubmit, setAttemptedSubmit] = React.useState(false);
+
+    const customMessages = {
+        title: 'Title cannot be empty.',
+        content: 'Content cannot be empty.',
+    };
+
     const submit = (e) => {
         e.preventDefault();
-        post(route('posts.store'));
+        setAttemptedSubmit(true);
+
+        if (data.title.trim() !== '' && data.content.trim() !== '') {
+            post(route('posts.store'), {
+                onSuccess: () => {
+                    reset(); 
+                    setAttemptedSubmit(false);
+                },
+            });
+        }
     };
 
     return (
         <AppLayout>
             <Head title="Create Post" />
 
-             <div className="max-w-2xl mx-auto mt-4">
+            <div className="max-w-2xl mx-auto mt-4">
                 <Link
                     href={route('posts.index')}
                     className="text-blue-600 hover:underline mb-4 inline-block"
@@ -30,7 +46,7 @@ export default function CreatePost() {
                 </Link>
             </div>
 
-            <form onSubmit={submit} className="max-w-2xl mx-auto mt-8 space-y-6">
+            <form onSubmit={submit} className="max-w-2xl mx-auto mt-8 space-y-6 bg-white p-6 rounded-xl shadow-md">
                 <div>
                     <InputLabel htmlFor="title" value="Title" />
                     <TextInput
@@ -39,9 +55,11 @@ export default function CreatePost() {
                         value={data.title}
                         onChange={(e) => setData('title', e.target.value)}
                         className="mt-1 block w-full"
-                        required
                     />
-                    <InputError message={errors.title} className="mt-2" />
+                    <InputError
+                        message={attemptedSubmit && data.title.trim() === '' ? customMessages.title : errors.title}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div>
@@ -51,11 +69,13 @@ export default function CreatePost() {
                         name="content"
                         value={data.content}
                         onChange={(e) => setData('content', e.target.value)}
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm resize-none"
                         rows={6}
-                        required
                     ></textarea>
-                    <InputError message={errors.content} className="mt-2" />
+                    <InputError
+                        message={attemptedSubmit && data.content.trim() === '' ? customMessages.content : errors.content}
+                        className="mt-2"
+                    />
                 </div>
 
                 <PrimaryButton className="mt-4" disabled={processing}>
