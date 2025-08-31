@@ -1,5 +1,6 @@
 import React from 'react';
 import { router } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function Header({ user }) {
     const handleLogout = (e) => {
@@ -11,14 +12,10 @@ export default function Header({ user }) {
         <header className="p-4 bg-gray-100 flex justify-between items-center">
             <div className="text-xl font-bold">Laravel Blog Application</div>
 
-            <div>
-                <span className="mr-4">Welcome, {user.name}</span>
-                <button
-                    onClick={handleLogout}
-                    className="text-sm text-red-600 underline hover:text-red-800"
-                >
+            <div className="flex items-center gap-4">  
+                <PrimaryButton onClick={handleLogout}>
                     Logout
-                </button>
+                </PrimaryButton>
             </div>
         </header>
     );

@@ -10,12 +10,11 @@ export default function Posts() {
         <AppLayout>
             <Head title="Home" />
 
-            <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
-                Welcome to the Blog Application!
-            </h1>
-
             {auth.user && !auth.user.is_guest && (
-                <div className="flex justify-center mb-6">
+                <div className="flex flex-col items-center mb-6">
+                    <p className="text-gray-700 mb-2 text-center">
+                        Hello {auth.user.name}, welcome to the blog app!
+                    </p>
                     <Link
                         href="/posts/create"
                         className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
