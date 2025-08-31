@@ -1,7 +1,8 @@
 import React from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
-import PostCard from '@/Pages/Posts/PostCard'; 
+import PostCard from '@/Pages/Posts/PostCard';
+import CommentForm from '@/Pages/Comments/CommentForm'; 
 
 export default function Posts() {
     const { posts, auth } = usePage().props;
@@ -30,7 +31,11 @@ export default function Posts() {
 
             <div className="grid md:grid-cols-2 gap-6">
                 {posts && posts.map(post => (
-                    <PostCard key={post.id} post={post} auth={auth} />
+                    <div key={post.id} className="flex flex-col gap-2">
+                        <PostCard post={post} auth={auth} />
+                         
+                        {auth.user && <CommentForm postId={post.id} />}
+                    </div>
                 ))}
             </div>
         </AppLayout>
