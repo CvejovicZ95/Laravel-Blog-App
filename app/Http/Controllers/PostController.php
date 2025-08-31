@@ -9,6 +9,10 @@ class PostController extends Controller
 {
     public function index()
     {
+        if (!auth()->check()) {
+            return redirect()->route('register');
+        }
+
         $posts = Post::with(['user', 'comments.user'])->latest()->get();
 
         return inertia('Posts/Posts', [
