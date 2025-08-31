@@ -1,8 +1,9 @@
 import React from 'react';
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
+import HomePageButton from '@/Components/HomePageButton';
 import PrimaryButton from '@/Components/PrimaryButton';
 import AppLayout from '@/Layouts/AppLayout';
 
@@ -35,15 +36,10 @@ export default function CreatePost() {
 
     return (
         <AppLayout>
-            <Head title="Create Post" />
+            <Head title="Create Blog" />
 
             <div className="max-w-2xl mx-auto mt-4">
-                <Link
-                    href={route('posts.index')}
-                    className="text-blue-600 hover:underline mb-4 inline-block"
-                >
-                    &larr; Back to Posts
-                </Link>
+                <HomePageButton /> 
             </div>
 
             <form onSubmit={submit} className="max-w-2xl mx-auto mt-8 space-y-6 bg-white p-6 rounded-xl shadow-md">
@@ -79,7 +75,7 @@ export default function CreatePost() {
                 </div>
 
                 <PrimaryButton className="mt-4" disabled={processing}>
-                    Create Post
+                    Create Blog
                 </PrimaryButton>
             </form>
         </AppLayout>

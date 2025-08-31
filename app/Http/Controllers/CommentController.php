@@ -22,7 +22,7 @@ class CommentController extends Controller
             'comment' => $request->comment,
         ]);
 
-        return redirect()->route('posts.show', $post->id);
+        return back();
     }
 
     public function destroy($id)
@@ -33,6 +33,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect()->route('posts.show', $comment->post_id);
+        return back();
     }
 }

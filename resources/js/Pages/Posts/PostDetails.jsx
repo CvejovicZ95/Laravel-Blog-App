@@ -4,8 +4,8 @@ import { formatDistanceToNow } from 'date-fns';
 
 export default function PostDetails({ post, isSingle }) {
     return (
-        <div className="mb-4">
-            <h2 className="text-xl font-bold text-gray-800 mb-2">
+        <div className="mb-4 p-3">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
                 {isSingle ? (
                     post.title
                 ) : (
@@ -14,9 +14,12 @@ export default function PostDetails({ post, isSingle }) {
                     </Link>
                 )}
             </h2>
-            <p className="text-gray-700 mb-2">{post.content}</p>
-            <p className="text-gray-500 text-sm mb-2">By {post.user?.name || 'Unknown user'}</p>
-            <p className="text-gray-400 text-xs">
+
+            <p className="text-gray-700 text-sm md:text-base mb-2">{post.content}</p>
+
+            <p className="text-gray-500 text-xs mb-1">By: {post.user?.name || 'Unknown user'}</p>
+
+            <p className="text-gray-400 text-[10px]">
                 {formatDistanceToNow(new Date(post.updated_at), { addSuffix: true })}
             </p>
         </div>
