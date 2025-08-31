@@ -83,4 +83,19 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function show(Post $post)
+    {
+        return inertia('Posts/ShowPost', [
+            'post' => $post->load('user'),
+            'auth' => [
+                'user' => auth()->user() ? [
+                    'id' => auth()->user()->id,
+                    'name' => auth()->user()->name,
+                    'email' => auth()->user()->email,
+                    'is_guest' => auth()->user()->is_guest,
+                ] : null,
+            ],
+        ]);
+    }
 }
