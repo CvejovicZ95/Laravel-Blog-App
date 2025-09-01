@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, router } from '@inertiajs/react';
+import DeleteBlogButton from './DeleteBlogButton';
 
 export default function PostActions({ post, auth }) {
     if (!auth.user || auth.user.id !== post.user_id) return null;
@@ -18,12 +19,7 @@ export default function PostActions({ post, auth }) {
             >
                 Edit Blog
             </Link>
-            <button
-                onClick={handleDelete}
-                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-            >
-                Delete Blog
-            </button>
+            <DeleteBlogButton postId={post.id} />
         </div>
     );
 }
