@@ -17,8 +17,13 @@ export default function CommentList({ comments, post, auth }) {
 
                     <div className="flex flex-col gap-0.5 text-xs text-gray-600">
                         <span className="font-semibold">By: {comment.user?.name || 'Unknown'}</span>
-                        {auth.user && (auth.user.id === comment.user_id || auth.user.id === post.user_id) && (
-                            <DeleteCommentButton commentId={comment.id} />
+                        {auth.user && (auth.user.id === comment.user_id || auth.user.id === post.user_id || auth.user.is_admin) && (
+                        <DeleteCommentButton
+                            commentId={comment.id}
+                            commentUserId={comment.user_id}
+                            postUserId={post.user_id}
+                            auth={auth}
+                        />
                         )}
                     </div>
 

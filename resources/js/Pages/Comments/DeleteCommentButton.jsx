@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { router } from '@inertiajs/react';
 
-export default function DeleteCommentButton({ commentId }) {
+export default function DeleteCommentButton({ commentId, commentUserId, postUserId, auth }) {
     const [showConfirm, setShowConfirm] = useState(false);
 
+    if (!auth?.user || (auth.user.id !== commentUserId && auth.user.id !== postUserId && !auth.user.is_admin)) {
+        return null;
+    }
+
     const handleDelete = () => {
-        router.delete(route('comments.destroy', commentId));
+        router.delete(route('comments.destroy', { comment: commentId }));
         setShowConfirm(false);
     };
 
@@ -20,7 +24,7 @@ export default function DeleteCommentButton({ commentId }) {
 
             {showConfirm && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999]">
-                    <div className="bg-white p-6 rounded-lg shadow-lg text-center z-[9999]">
+                    <div className="bg-white p-6 rounded-lg shadow-lg text-center z-[10000]">
                         <h2 className="text-lg font-semibold mb-4">Are you sure?</h2>
                         <p className="text-gray-600 mb-6">This action cannot be undone.</p>
                         <div className="flex justify-center gap-4">

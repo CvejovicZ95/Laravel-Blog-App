@@ -23,6 +23,7 @@ class PostController extends Controller
                     'name' => auth()->user()->name,
                     'email' => auth()->user()->email,
                     'is_guest' => auth()->user()->is_guest,
+                    'is_admin' => auth()->user()->is_admin,
                 ] : null,
             ],
         ]);

@@ -11,7 +11,6 @@ export default function DeleteBlogButton({ postId }) {
 
     return (
         <>
-            {/* Delete dugme */}
             <button
                 onClick={() => setShowConfirm(true)}
                 className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"

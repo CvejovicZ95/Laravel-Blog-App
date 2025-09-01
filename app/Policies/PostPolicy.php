@@ -29,7 +29,7 @@ class PostPolicy
 
     public function delete(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return $user->is_admin || $user->id === $post->user_id;
     }
 
     public function restore(User $user, Post $post): bool
@@ -39,6 +39,6 @@ class PostPolicy
 
     public function forceDelete(User $user, Post $post): bool
     {
-        return $user->role === 'admin';
+        return $user->is_admin;
     }
 }
