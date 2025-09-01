@@ -40,8 +40,8 @@ class PostController extends Controller
         $this->authorize('create', Post::class);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:4|max:255',
+            'content' => 'required|string|min:20',
         ]);
 
         Post::create([
@@ -67,8 +67,8 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:4|max:255',
+            'content' => 'required|string|min:20',
         ]);
 
         $post->update([
