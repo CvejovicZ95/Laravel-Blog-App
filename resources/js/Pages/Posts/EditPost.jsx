@@ -8,7 +8,7 @@ export default function EditPost({ post }) {
         content: post.content,
     });
 
-    const [frontendErrors, setFrontendErrors] = React.useState({});
+    const [error, setError] = React.useState({});
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ export default function EditPost({ post }) {
             newErrors.content = "Content is required.";
         }
 
-        setFrontendErrors(newErrors);
+        setError(newErrors);
 
         if (Object.keys(newErrors).length > 0) {
             return;
@@ -45,7 +45,7 @@ export default function EditPost({ post }) {
                         onChange={e => setData('title', e.target.value)}
                         className="w-full border rounded p-2"
                     />
-                    {frontendErrors.title && <div className="text-red-500 text-sm">{frontendErrors.title}</div>}
+                    {error.title && <div className="text-red-500 text-sm">{error.title}</div>}
                     {errors.title && <div className="text-red-500 text-sm">{errors.title}</div>}
                 </div>
 
@@ -56,7 +56,7 @@ export default function EditPost({ post }) {
                         onChange={e => setData('content', e.target.value)}
                         className="w-full border rounded p-2"
                     />
-                    {frontendErrors.content && <div className="text-red-500 text-sm">{frontendErrors.content}</div>}
+                    {error.content && <div className="text-red-500 text-sm">{error.content}</div>}
                     {errors.content && <div className="text-red-500 text-sm">{errors.content}</div>}
                 </div>
 
@@ -65,7 +65,7 @@ export default function EditPost({ post }) {
                     disabled={processing}
                     className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                    Update Post
+                    Update Blog
                 </button>
             </form>
         </AppLayout>

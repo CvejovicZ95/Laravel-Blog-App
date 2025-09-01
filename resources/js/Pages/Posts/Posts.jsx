@@ -11,6 +11,7 @@ export default function Posts() {
         <AppLayout>
             <Head title="Home" />
 
+ 
             {(!posts || posts.length === 0) && (
                 <p className="text-center text-gray-500 mt-8 text-lg">No posts yet.</p>
             )}

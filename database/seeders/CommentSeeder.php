@@ -6,34 +6,25 @@ use Illuminate\Database\Seeder;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use Faker\Factory as Faker;
 
 class CommentSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
+        $faker = Faker::create();
+
         $posts = Post::all();
-        $users = User::all();
+        $users = User::where('is_guest', false)->get();
 
-        foreach ($posts as $post) {      
-            Comment::create([
-                'post_id' => $post->id,
-                'user_id' => $users[0]->id,
-                'comment' => 'Ovo je komentar od ' . $users[0]->name,
-            ]);
+        foreach ($posts as $post) {
+            for ($i = 0; $i < rand(1, 4); $i++) {
+                $commentUser = $users->random();
 
-            $secondUser = $users[1] ?? $users[0];
-            Comment::create([
-                'post_id' => $post->id,
-                'user_id' => $secondUser->id,
-                'comment' => 'Ovo je komentar od ' . $secondUser->name,
-            ]);
-
-            $guest = $users->where('is_guest', 1)->first();
-            if ($guest) {
                 Comment::create([
                     'post_id' => $post->id,
-                    'user_id' => $guest->id,
-                    'comment' => 'Komentar od gosta ' . $guest->name,
+                    'user_id' => $commentUser->id,
+                    'comment' => $faker->sentences(rand(1, 3), true) . ' ' . $faker->emoji,
                 ]);
             }
         }

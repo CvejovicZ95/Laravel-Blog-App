@@ -1,6 +1,6 @@
 import React from 'react';
-import { router } from '@inertiajs/react';
 import { formatDistanceToNow } from 'date-fns';
+import DeleteCommentButton from './DeleteCommentButton';
 
 export default function CommentList({ comments, post, auth }) {
     if (!comments || comments.length === 0) return null;
@@ -17,17 +17,13 @@ export default function CommentList({ comments, post, auth }) {
 
                     <div className="flex flex-col gap-0.5 text-xs text-gray-600">
                         <span className="font-semibold">By: {comment.user?.name || 'Unknown'}</span>
-                        {auth.user && (auth.user.id === comment.user_id || auth.user.id === post.user_id) && (
-                            <button
-                                onClick={() => {
-                                    if (confirm("Are you sure you want to delete this comment?")) {
-                                        router.delete(route('comments.destroy', comment.id));
-                                    }
-                                }}
-                                className="mt-1 px-2 py-0.5 bg-red-600 text-white rounded hover:bg-red-700 self-start"
-                            >
-                                Delete Comment
-                            </button>
+                        {auth.user && (auth.user.id === comment.user_id || auth.user.id === post.user_id || auth.user.is_admin) && (
+                        <DeleteCommentButton
+                            commentId={comment.id}
+                            commentUserId={comment.user_id}
+                            postUserId={post.user_id}
+                            auth={auth}
+                        />
                         )}
                     </div>
 

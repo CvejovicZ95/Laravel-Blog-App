@@ -23,6 +23,7 @@ class PostController extends Controller
                     'name' => auth()->user()->name,
                     'email' => auth()->user()->email,
                     'is_guest' => auth()->user()->is_guest,
+                    'is_admin' => auth()->user()->is_admin,
                 ] : null,
             ],
         ]);
@@ -40,8 +41,8 @@ class PostController extends Controller
         $this->authorize('create', Post::class);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:4|max:255',
+            'content' => 'required|string|min:20',
         ]);
 
         Post::create([
@@ -67,8 +68,8 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:4|max:255',
+            'content' => 'required|string|min:20',
         ]);
 
         $post->update([
