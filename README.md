@@ -1,4 +1,4 @@
-# Laravel-Blog-App"
+# Laravel-Blog-App
 
 ## Project Overview
 
@@ -42,14 +42,15 @@ Laravel-Blog-App is a blog application built with the Laravel framework and Reac
 **Clone the project in Laragon's www folder**  
 
 - For Laragon users, always clone the project inside the `www` folder (default: `C:\laragon\www`) so that Laragon can properly recognize it.
-- Open git bash
+- Open `git bash`
 - cd /c/laragon/www
 - git clone <https://github.com/CvejovicZ95/Laravel-Blog-App.git>
 - Open Laragon terminal and navigate into the project folder.
 - cd Laravel-Blog-App
 - Install PHP dependencies(via Laragon terminal) `composer install`
 - Open the project in your code editor (e.g., VS Code) and open a terminal there.
-- Install Node dependencies `npm install`
+- Install Node dependencies `npm install`.
+- Create .env file
 
 ## Environment Variables
 
@@ -80,6 +81,9 @@ Laravel-Blog-App is a blog application built with the Laravel framework and Reac
 - **Client:**
   - `npm run dev`
 
+- If you want to populate the database with fake demo data (users, posts, comments):
+  - `php artisan migrate:fresh --seed`
+  
 ## Additional Notes
 
 - User authentication is built using Laravel's built-in Auth scaffold (register, login, logout), which automatically handles user registration, login, and logout with all necessary middleware (`auth`). This approach leverages Laravel’s proven implementation, reducing potential errors and speeding up development.
