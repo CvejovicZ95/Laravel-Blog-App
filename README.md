@@ -39,9 +39,16 @@ Laravel-Blog-App is a blog application built with the Laravel framework and Reac
 
 ## Installation and Setup
 
+**Clone the project in Laragon's www folder**  
+
+- For Laragon users, always clone the project inside the `www` folder (default: `C:\laragon\www`) so that Laragon can properly recognize it.
+- Open git bash
+- cd /c/laragon/www
 - git clone <https://github.com/CvejovicZ95/Laravel-Blog-App.git>
-- Install PHP dependencies(via Laragon terminal) `composer install`
+- Open Laragon terminal and navigate into the project folder.
 - cd Laravel-Blog-App
+- Install PHP dependencies(via Laragon terminal) `composer install`
+- Open the project in your code editor (e.g., VS Code) and open a terminal there.
 - Install Node dependencies `npm install`
 
 ## Environment Variables
