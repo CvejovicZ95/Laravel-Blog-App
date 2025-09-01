@@ -67,7 +67,7 @@ Laravel-Blog-App is a blog application built with the Laravel framework and Reac
 ## Start Scripts
 
 - Open **two terminals** in the project folder:
-- 
+  
 - **Server:**
   - `php artisan serve`
 - **Client:**
